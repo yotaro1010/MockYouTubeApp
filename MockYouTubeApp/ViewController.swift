@@ -30,58 +30,56 @@ class ViewController: UIViewController {
     }
     
     private func fetchYouTubeSearchInfo(){
-        let urlString = "https://www.googleapis.com/youtube/v3/search?q=lebron&key=AIzaSyDpwMmfE-r1Jx6rvkZn5yqWdXn9_EQJRpU&part=snippet"
         
-        let request = AF.request(urlString)
+        let params = ["q": "lebron"]
         
-        request.responseJSON { (response) in
-            
-            do {
-                guard let data = response.data else {return}
-                let decoder = JSONDecoder()
-                let video = try decoder.decode(Video.self, from: data)
+//        ここでapiRequestを呼び出す時に毎回初期化（let api = APIRequest()...みたいにやると良くない通信が重くなるのでそれは避ける）
+//        では何を使うか、シングルトンを使い　class　APIRequstのメソッドをひとつのインスタンスとして扱い、それを呼びだすことで、毎回の初期化を避ける
+        APIRequest.shared.request(path: .search, params: params, type: Video.self) { (video) in
+//            fetchしたitemsの情報をvideoに渡す
+                     self.videoItemsForVC = video.items
+ //            1番最初の配列の要素[0]だけ情報を取得、またそこからchannelIdも取得
+            let id = self.videoItemsForVC[0].snippet.channelId
+            self.fetchYouTubeChannelInfo(id: id)
+        }
+    
+//        元の処理
+//        let urlString = "https://www.googleapis.com/youtube/v3/search?q=lebron&key=AIzaSyDpwMmfE-r1Jx6rvkZn5yqWdXn9_EQJRpU&part=snippet"
+//        let request = AF.request(urlString)
+//        request.responseJSON { (response) in
+//            do {
+//                guard let data = response.data else {return}
+//                let decoder = JSONDecoder()
+//                let video = try decoder.decode(Video.self, from: data)
 //                fetchしたitemsの情報をvideoに渡す
-                self.videoItemsForVC = video.items
+//                self.videoItemsForVC = video.items
 //                self.videoListCollectionView.reloadData()
 //             番最初の配列の要素[0]だけ情報を取得、またそこからchannelIdも取得
-                let id = self.videoItemsForVC[0].snippet.channelId
-                self.fetchYouTubeChannelInfo(id: id)
-
-      
-            }catch {
-                print("変換に失敗しました：", error)
-            }
-            
-        }
+//                let id = self.videoItemsForVC[0].snippet.channelId
+//                self.fetchYouTubeChannelInfo(id: id)
+//            }catch {
+//                print("変換に失敗しました：", error)
+//            }
+//        }
     }
+    
     private func fetchYouTubeChannelInfo(id: String){
-        let urlString = "https://www.googleapis.com/youtube/v3/channels?=lebron&key=AIzaSyDpwMmfE-r1Jx6rvkZn5yqWdXn9_EQJRpU&part=snippet&id=\(id)"
         
-        let request = AF.request(urlString)
+        let params = [
+            "id": id
+        ]
         
-        request.responseJSON { (response) in
-            
-            do {
-                guard let data = response.data else {return}
-                let decoder = JSONDecoder()
-                let channel = try decoder.decode(Channel.self, from: data)
-
-//                 取得したすべての[Chanel]itemに情報を反映
-                self.videoItemsForVC.forEach { (item) in
-                    item.channel = channel
-                }
-                
-                self.videoListCollectionView.reloadData()
-                
-            }catch {
-                print("変換に失敗しました：", error)
+        APIRequest.shared.request(path: .channels, params: params, type: Channel.self) { (channel) in
+//            取得したすべての[Chanel]itemに情報を反映
+            self.videoItemsForVC.forEach { (item) in
+                item.channel = channel
             }
-            
+            self.videoListCollectionView.reloadData()
         }
     }
-
+    
 }
-
+    
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
