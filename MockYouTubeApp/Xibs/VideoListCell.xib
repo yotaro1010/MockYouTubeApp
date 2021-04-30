@@ -17,14 +17,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="315" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qHt-U1-xcj">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qHt-U1-xcj">
                         <rect key="frame" x="0.0" y="15" width="315" height="280"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="280" id="A9p-dt-ZtR"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0eJ-vP-Zz0">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0eJ-vP-Zz0">
                         <rect key="frame" x="10" y="305" width="40" height="40"/>
                         <color key="backgroundColor" systemColor="systemRedColor"/>
                         <constraints>
@@ -64,6 +64,9 @@
             <size key="customSize" width="315" height="360"/>
             <connections>
                 <outlet property="channelImageView" destination="0eJ-vP-Zz0" id="d8Y-qx-d6w"/>
+                <outlet property="discriptionLabel" destination="jaX-7I-iYW" id="Kr0-fr-lZ8"/>
+                <outlet property="thumbnailImageView" destination="qHt-U1-xcj" id="1Ud-mV-nco"/>
+                <outlet property="titleLabel" destination="pDa-9L-EIh" id="a9l-62-AyG"/>
             </connections>
             <point key="canvasLocation" x="180.43478260869566" y="70.3125"/>
         </collectionViewCell>

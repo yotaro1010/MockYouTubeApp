@@ -7,6 +7,7 @@ target 'MockYouTubeApp' do
 
   # Pods for MockYouTubeApp
 pod 'Alamofire', '~> 5.2'
+pod 'Nuke'
 
   target 'MockYouTubeAppTests' do
     inherit! :search_paths
