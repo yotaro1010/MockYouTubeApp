@@ -12,6 +12,7 @@ import Alamofire
 class ViewController: UIViewController {
 
     
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var videoListCollectionView: UICollectionView!
     
     private let cellId = "cellId"
@@ -26,6 +27,8 @@ class ViewController: UIViewController {
         videoListCollectionView.delegate = self
         videoListCollectionView.dataSource = self
         
+        profileImageView.layer.cornerRadius = 20
+        
        fetchYouTubeSearchInfo()
     }
     
@@ -35,7 +38,7 @@ class ViewController: UIViewController {
         
 //        ここでapiRequestを呼び出す時に毎回初期化（let api = APIRequest()...みたいにやると良くない通信が重くなるのでそれは避ける）
 //        では何を使うか、シングルトンを使い　class　APIRequstのメソッドをひとつのインスタンスとして扱い、それを呼びだすことで、毎回の初期化を避ける
-        APIRequest.shared.request(path: .search, params: params, type: Video.self) { (video) in
+        API.shared.request(path: .search, params: params, type: Video.self) { (video) in
 //            fetchしたitemsの情報をvideoに渡す
                      self.videoItemsForVC = video.items
  //            1番最初の配列の要素[0]だけ情報を取得、またそこからchannelIdも取得
@@ -69,7 +72,7 @@ class ViewController: UIViewController {
             "id": id
         ]
         
-        APIRequest.shared.request(path: .channels, params: params, type: Channel.self) { (channel) in
+        API.shared.request(path: .channels, params: params, type: Channel.self) { (channel) in
 //            取得したすべての[Chanel]itemに情報を反映
             self.videoItemsForVC.forEach { (item) in
                 item.channel = channel

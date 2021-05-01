@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class APIRequest {
+class API {
     
 //    pathをさらに安全にする（タイプミスがないように）
     enum PathType: String {
@@ -17,7 +17,7 @@ class APIRequest {
     }
     
     // シングルトンを作りメソッドも含めてclass自体をひとつのインスタンスにする
-    static var shared = APIRequest()
+    static let shared = API()
     
     private let baseUrlString = "https://www.googleapis.com/youtube/v3/"
     
@@ -41,17 +41,19 @@ class APIRequest {
             
             request.responseJSON { (response) in
                 
-                do {
-                    guard let data = response.data else {return}
-                    let decoder = JSONDecoder()
-    //                どんな型(Video,Channel)が入ってきてもTが変換されて、Decodeしてくれる
-                    let value = try decoder.decode(T.self, from: data)
-                    completion(value)
-                    
-                }catch {
-                    print("変換に失敗しました：", error)
+                guard let statusCode = response.response?.statusCode else {return}
+                if statusCode <= 300 {
+                    do {
+                        guard let data = response.data else {return}
+                        let decoder = JSONDecoder()
+        //                どんな型(Video,Channel)が入ってきてもTが変換されて、Decodeしてくれる
+                        let value = try decoder.decode(T.self, from: data)
+                        completion(value)
+                        
+                    }catch {
+                        print("変換に失敗しました：", error)
+                    }  
                 }
-                
             }
         }
 }

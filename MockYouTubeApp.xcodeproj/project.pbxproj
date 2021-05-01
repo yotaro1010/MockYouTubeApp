@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C03F3BE263D86A700202A55 /* BaseTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C03F3BD263D86A600202A55 /* BaseTabBar.storyboard */; };
+		0C03F3C9263D88B200202A55 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03F3C8263D88B200202A55 /* BaseTabBarController.swift */; };
+		0C03F3D3263D901C00202A55 /* UIImage-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03F3D2263D901C00202A55 /* UIImage-extension.swift */; };
 		0C0EBA35263B12A20094C2CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EBA34263B12A20094C2CC /* AppDelegate.swift */; };
 		0C0EBA37263B12A20094C2CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EBA36263B12A20094C2CC /* SceneDelegate.swift */; };
 		0C0EBA39263B12A20094C2CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EBA38263B12A20094C2CC /* ViewController.swift */; };
@@ -18,7 +21,7 @@
 		0C0EBA69263B16A40094C2CC /* VideoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EBA68263B16A40094C2CC /* VideoListCell.swift */; };
 		0C0EBA7A263B178F0094C2CC /* VideoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C0EBA79263B178F0094C2CC /* VideoListCell.xib */; };
 		0C0EBA8D263B2D380094C2CC /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EBA8C263B2D380094C2CC /* Video.swift */; };
-		0C3C1FAF263C0D6100238732 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3C1FAE263C0D6100238732 /* APIRequest.swift */; };
+		0C3C1FAF263C0D6100238732 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3C1FAE263C0D6100238732 /* API.swift */; };
 		0CCA74A6263BD52A00C33606 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCA74A5263BD52A00C33606 /* Channel.swift */; };
 		6B169F5E1D8DD67DD478DD0A /* Pods_MockYouTubeApp_MockYouTubeAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0E0E5F76B42715CE0ACAA9 /* Pods_MockYouTubeApp_MockYouTubeAppUITests.framework */; };
 		BC36A9C56211A13B7FF53796 /* Pods_MockYouTubeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB36AD1384FC3523FB6A71EB /* Pods_MockYouTubeApp.framework */; };
@@ -43,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C03F3BD263D86A600202A55 /* BaseTabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BaseTabBar.storyboard; sourceTree = "<group>"; };
+		0C03F3C8263D88B200202A55 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		0C03F3D2263D901C00202A55 /* UIImage-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage-extension.swift"; sourceTree = "<group>"; };
 		0C0EBA31263B12A20094C2CC /* MockYouTubeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockYouTubeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C0EBA34263B12A20094C2CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C0EBA36263B12A20094C2CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +66,7 @@
 		0C0EBA68263B16A40094C2CC /* VideoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListCell.swift; sourceTree = "<group>"; };
 		0C0EBA79263B178F0094C2CC /* VideoListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoListCell.xib; sourceTree = "<group>"; };
 		0C0EBA8C263B2D380094C2CC /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
-		0C3C1FAE263C0D6100238732 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		0C3C1FAE263C0D6100238732 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0CCA74A5263BD52A00C33606 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		2E7336FB9B8DB6110F382B34 /* Pods-MockYouTubeAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockYouTubeAppTests.release.xcconfig"; path = "Target Support Files/Pods-MockYouTubeAppTests/Pods-MockYouTubeAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		34D575FC8D1C863F718D24B0 /* Pods-MockYouTubeApp-MockYouTubeAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockYouTubeApp-MockYouTubeAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-MockYouTubeApp-MockYouTubeAppUITests/Pods-MockYouTubeApp-MockYouTubeAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +107,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C03F3CD263D88BD00202A55 /* ViewContollers */ = {
+			isa = PBXGroup;
+			children = (
+				0C03F3C8263D88B200202A55 /* BaseTabBarController.swift */,
+				0C0EBA38263B12A20094C2CC /* ViewController.swift */,
+			);
+			path = ViewContollers;
+			sourceTree = "<group>";
+		};
+		0C03F3D1263D8FFD00202A55 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0C03F3D2263D901C00202A55 /* UIImage-extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0C0EBA28263B12A10094C2CC = {
 			isa = PBXGroup;
 			children = (
@@ -126,13 +149,15 @@
 		0C0EBA33263B12A20094C2CC /* MockYouTubeApp */ = {
 			isa = PBXGroup;
 			children = (
-				0C3C1FAD263C0D4100238732 /* Utilities */,
+				0C03F3D1263D8FFD00202A55 /* Extensions */,
+				0C3C1FAD263C0D4100238732 /* Service */,
 				0C0EBA8B263B2D1A0094C2CC /* Models */,
 				0C0EBA70263B17460094C2CC /* Xibs */,
 				0C0EBA67263B168F0094C2CC /* Cells */,
+				0C03F3CD263D88BD00202A55 /* ViewContollers */,
 				0C0EBA34263B12A20094C2CC /* AppDelegate.swift */,
 				0C0EBA36263B12A20094C2CC /* SceneDelegate.swift */,
-				0C0EBA38263B12A20094C2CC /* ViewController.swift */,
+				0C03F3BD263D86A600202A55 /* BaseTabBar.storyboard */,
 				0C0EBA3A263B12A20094C2CC /* Main.storyboard */,
 				0C0EBA3D263B12A60094C2CC /* Assets.xcassets */,
 				0C0EBA3F263B12A60094C2CC /* LaunchScreen.storyboard */,
@@ -184,12 +209,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0C3C1FAD263C0D4100238732 /* Utilities */ = {
+		0C3C1FAD263C0D4100238732 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				0C3C1FAE263C0D6100238732 /* APIRequest.swift */,
+				0C3C1FAE263C0D6100238732 /* API.swift */,
 			);
-			path = Utilities;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		4A7085312EDD226877E4E4D0 /* Pods */ = {
@@ -326,6 +351,7 @@
 				0C0EBA41263B12A60094C2CC /* LaunchScreen.storyboard in Resources */,
 				0C0EBA7A263B178F0094C2CC /* VideoListCell.xib in Resources */,
 				0C0EBA3E263B12A60094C2CC /* Assets.xcassets in Resources */,
+				0C03F3BE263D86A700202A55 /* BaseTabBar.storyboard in Resources */,
 				0C0EBA3C263B12A20094C2CC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,8 +481,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C0EBA39263B12A20094C2CC /* ViewController.swift in Sources */,
-				0C3C1FAF263C0D6100238732 /* APIRequest.swift in Sources */,
+				0C3C1FAF263C0D6100238732 /* API.swift in Sources */,
 				0CCA74A6263BD52A00C33606 /* Channel.swift in Sources */,
+				0C03F3C9263D88B200202A55 /* BaseTabBarController.swift in Sources */,
+				0C03F3D3263D901C00202A55 /* UIImage-extension.swift in Sources */,
 				0C0EBA69263B16A40094C2CC /* VideoListCell.swift in Sources */,
 				0C0EBA35263B12A20094C2CC /* AppDelegate.swift in Sources */,
 				0C0EBA37263B12A20094C2CC /* SceneDelegate.swift in Sources */,

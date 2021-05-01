@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jpu-Vs-41A">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ylT-zM-reA">
                                     <size key="itemSize" width="128" height="128"/>
@@ -37,26 +37,89 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KH7-XZ-W1V">
+                                <rect key="frame" x="0.0" y="44" width="414" height="60"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clip" translatesAutoresizingMaskIntoConstraints="NO" id="zMz-Oe-Ynk">
+                                        <rect key="frame" x="10" y="5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="8mu-W0-CeT"/>
+                                            <constraint firstAttribute="height" constant="50" id="ttQ-a7-xvd"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YouTube" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOM-b9-aac">
+                                        <rect key="frame" x="63" y="18" width="81" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batman" translatesAutoresizingMaskIntoConstraints="NO" id="stL-oN-2IB">
+                                        <rect key="frame" x="364" y="10" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="m1R-oZ-5N0"/>
+                                            <constraint firstAttribute="width" secondItem="stL-oN-2IB" secondAttribute="height" multiplier="1:1" id="uS9-SM-MlV"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIS-q6-xMS">
+                                        <rect key="frame" x="336" y="17.5" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="lJD-Ij-Azp"/>
+                                            <constraint firstAttribute="width" secondItem="NIS-q6-xMS" secondAttribute="height" multiplier="1:1" id="z08-z1-fGE"/>
+                                        </constraints>
+                                        <state key="normal" image="search"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzD-Wf-amO">
+                                        <rect key="frame" x="308" y="17.5" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="jzD-Wf-amO" secondAttribute="height" multiplier="1:1" id="JUs-ow-5Fj"/>
+                                            <constraint firstAttribute="width" constant="25" id="kzj-ky-qeY"/>
+                                        </constraints>
+                                        <state key="normal" image="movie"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zMz-Oe-Ynk" firstAttribute="centerY" secondItem="KH7-XZ-W1V" secondAttribute="centerY" id="51F-4V-UK0"/>
+                                    <constraint firstAttribute="trailing" secondItem="stL-oN-2IB" secondAttribute="trailing" constant="10" id="Acl-LB-aeN"/>
+                                    <constraint firstItem="stL-oN-2IB" firstAttribute="leading" secondItem="NIS-q6-xMS" secondAttribute="trailing" constant="3" id="NDl-fp-bop"/>
+                                    <constraint firstItem="NIS-q6-xMS" firstAttribute="leading" secondItem="jzD-Wf-amO" secondAttribute="trailing" constant="3" id="R9b-Yy-qmO"/>
+                                    <constraint firstItem="iOM-b9-aac" firstAttribute="leading" secondItem="zMz-Oe-Ynk" secondAttribute="trailing" constant="3" id="Yw6-Jc-MXm"/>
+                                    <constraint firstItem="jzD-Wf-amO" firstAttribute="centerY" secondItem="KH7-XZ-W1V" secondAttribute="centerY" id="ZE6-34-8gg"/>
+                                    <constraint firstAttribute="height" constant="60" id="dwH-AQ-mZt"/>
+                                    <constraint firstItem="zMz-Oe-Ynk" firstAttribute="leading" secondItem="KH7-XZ-W1V" secondAttribute="leading" constant="10" id="eMr-db-snK"/>
+                                    <constraint firstItem="NIS-q6-xMS" firstAttribute="centerY" secondItem="KH7-XZ-W1V" secondAttribute="centerY" id="gZP-Fc-L6g"/>
+                                    <constraint firstItem="stL-oN-2IB" firstAttribute="centerY" secondItem="KH7-XZ-W1V" secondAttribute="centerY" id="v6K-e0-LLe"/>
+                                    <constraint firstItem="iOM-b9-aac" firstAttribute="centerY" secondItem="KH7-XZ-W1V" secondAttribute="centerY" id="xpd-bL-45Q"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="KH7-XZ-W1V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0Ak-M5-ftC"/>
                             <constraint firstItem="jpu-Vs-41A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6Lw-9K-fV5"/>
-                            <constraint firstItem="jpu-Vs-41A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HwL-1V-gyr"/>
+                            <constraint firstItem="KH7-XZ-W1V" firstAttribute="trailing" secondItem="jpu-Vs-41A" secondAttribute="trailing" id="HPA-Zw-2YE"/>
+                            <constraint firstItem="jpu-Vs-41A" firstAttribute="top" secondItem="KH7-XZ-W1V" secondAttribute="bottom" id="HwL-1V-gyr"/>
+                            <constraint firstItem="KH7-XZ-W1V" firstAttribute="leading" secondItem="jpu-Vs-41A" secondAttribute="leading" id="KZ7-iH-a8t"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jpu-Vs-41A" secondAttribute="bottom" id="af7-oQ-NZT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jpu-Vs-41A" secondAttribute="trailing" id="wGH-gt-Fld"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="profileImageView" destination="stL-oN-2IB" id="IOz-nk-KiK"/>
                         <outlet property="videoListCollectionView" destination="jpu-Vs-41A" id="Qdk-Z5-aE4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-146" y="74"/>
+            <point key="canvasLocation" x="-146.37681159420291" y="73.660714285714278"/>
         </scene>
     </scenes>
     <resources>
+        <image name="batman" width="1080" height="743"/>
+        <image name="clip" width="256" height="256"/>
+        <image name="movie" width="256" height="256"/>
+        <image name="search" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
