@@ -106,6 +106,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="headerHightConstraint" destination="dwH-AQ-mZt" id="HEk-Bs-GLv"/>
+                        <outlet property="headerTopConstraint" destination="0Ak-M5-ftC" id="JHx-ox-93F"/>
+                        <outlet property="headerVIew" destination="KH7-XZ-W1V" id="X9u-ys-nPj"/>
                         <outlet property="profileImageView" destination="stL-oN-2IB" id="IOz-nk-KiK"/>
                         <outlet property="videoListCollectionView" destination="jpu-Vs-41A" id="Qdk-Z5-aE4"/>
                     </connections>

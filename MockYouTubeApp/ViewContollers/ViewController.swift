@@ -11,9 +11,16 @@ import Alamofire
 
 class ViewController: UIViewController {
 
-    
+    @IBOutlet weak var headerVIew: UIView!
+    @IBOutlet weak var headerHightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var videoListCollectionView: UICollectionView!
+    
+//    0.5秒前にスクロールした位置
+    private var prevContentOffset: CGPoint = .init(x: 0, y: 0)
+//    headerを表示させるスピード
+    private let headerMoveHeight: CGFloat = 7
     
     private let cellId = "cellId"
     
@@ -80,8 +87,74 @@ class ViewController: UIViewController {
             self.videoListCollectionView.reloadData()
         }
     }
+//    スクロールを認識させる、動きと合わせてヘッダーのアニメーションを作る
+//    scrollViewを用いる
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        IBで作ったTopを座標取得によって移動させる
+//        座標をマイナスさせることで上に移動可能,スクロールごとにマイナスになる
+//        スクロールするたびに、0.5秒前の位置と比較しつつ上にスクロースしているのか、下にしているのか判断する
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.prevContentOffset = scrollView.contentOffset
+        }
+        
+//        上下方向にスクロール時,動きがおかしくなっているのを直す
+        guard let presentIndexPath = videoListCollectionView.indexPathForItem(at: scrollView.contentOffset) else {return}
+//        下方向時,座標が0の時アニメーションをさせない
+        if scrollView.contentOffset.y < 0 { return }
+//        上方向時:CGポイントからCellの番号を取得し、一番最後のCellになる前にアニメーション表示を止める、カウントは0から始まるため、フルカウントをすると-1をした分の値が最後のcellの位置だが、それよりも前に止めるため-2をして最後から２番目のcellのindexを取得
+        if presentIndexPath.row >= videoItemsForVC.count - 2 {return}
+        
+//        headerをスクロール時に薄くする
+        let alphaRatio = 1 / headerHightConstraint.constant
+        
+//        0.5秒前の値が小さい時(下にスクロールしているとき)　ヘッダーを隠す
+        if self.prevContentOffset.y < scrollView.contentOffset.y {
+            if headerTopConstraint.constant <= -headerHightConstraint.constant{ return }
+                headerTopConstraint.constant -= headerMoveHeight
+            headerVIew.alpha -= alphaRatio * headerMoveHeight
+        } else if self.prevContentOffset.y > scrollView.contentOffset.y {
+//            headrのTopが０になった場合 = 最大値
+            if headerTopConstraint.constant >= 0 {return}
+            headerTopConstraint.constant += headerMoveHeight
+            headerVIew.alpha += alphaRatio * headerMoveHeight
+
+        }
+    }
+//    スクロールを途中で止めたときのheaderのアニメーション
+//    挙動がまだおかしいときはscrollViewDidEndDragging,scrollViewDidEndDecelerating二つのメソッドが同時に呼び出されてしまっているから
+    
+//    指でピタッと止めたときはのみscrollViewDidEndDraggingを呼び出す 引数のdecelerateを使う
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            headerViewEndAnimation()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        headerViewEndAnimation()
+    }
+    
+    private func headerViewEndAnimation(){
+        //        下スクロール時
+                if headerTopConstraint.constant < -headerHightConstraint.constant / 2 {
+                    UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.8, options: [], animations: {
+                        self.headerTopConstraint.constant = -self.headerHightConstraint.constant
+                        self.headerVIew.alpha = 0
+                        self.view.layoutIfNeeded()
+                    })
+                }else {
+        //            上スクロール時
+                    UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.8, options: [], animations: {
+                        self.headerTopConstraint.constant = 0
+                        self.headerVIew.alpha = 1
+                        self.view.layoutIfNeeded()
+                    })
+                }
+            
+    }
     
 }
+
     
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
     
