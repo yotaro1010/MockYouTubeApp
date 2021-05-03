@@ -22,6 +22,9 @@
 		0C0EBA7A263B178F0094C2CC /* VideoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C0EBA79263B178F0094C2CC /* VideoListCell.xib */; };
 		0C0EBA8D263B2D380094C2CC /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EBA8C263B2D380094C2CC /* Video.swift */; };
 		0C3C1FAF263C0D6100238732 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3C1FAE263C0D6100238732 /* API.swift */; };
+		0C46EC90264032CB00B565CF /* AttensionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46EC8F264032CB00B565CF /* AttensionCell.swift */; };
+		0C46EC9826403AD500B565CF /* AttensionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46EC9726403AD500B565CF /* AttensionCollectionViewCell.swift */; };
+		0C46EC9D26403B4200B565CF /* AttensionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C46EC9C26403B4200B565CF /* AttensionCollectionViewCell.xib */; };
 		0C5A2D07263EDDC900EF0F16 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5A2D06263EDDC900EF0F16 /* Search.storyboard */; };
 		0C5A2D0C263EDE1300EF0F16 /* Channel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5A2D0B263EDE1300EF0F16 /* Channel.storyboard */; };
 		0C5A2D11263EDE7300EF0F16 /* Inbox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5A2D10263EDE7300EF0F16 /* Inbox.storyboard */; };
@@ -71,6 +74,9 @@
 		0C0EBA79263B178F0094C2CC /* VideoListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoListCell.xib; sourceTree = "<group>"; };
 		0C0EBA8C263B2D380094C2CC /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		0C3C1FAE263C0D6100238732 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0C46EC8F264032CB00B565CF /* AttensionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttensionCell.swift; sourceTree = "<group>"; };
+		0C46EC9726403AD500B565CF /* AttensionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttensionCollectionViewCell.swift; sourceTree = "<group>"; };
+		0C46EC9C26403B4200B565CF /* AttensionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttensionCollectionViewCell.xib; sourceTree = "<group>"; };
 		0C5A2D06263EDDC900EF0F16 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		0C5A2D0B263EDE1300EF0F16 /* Channel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Channel.storyboard; sourceTree = "<group>"; };
 		0C5A2D10263EDE7300EF0F16 /* Inbox.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inbox.storyboard; sourceTree = "<group>"; };
@@ -195,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				0C0EBA68263B16A40094C2CC /* VideoListCell.swift */,
+				0C46EC8F264032CB00B565CF /* AttensionCell.swift */,
+				0C46EC9726403AD500B565CF /* AttensionCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -203,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				0C0EBA79263B178F0094C2CC /* VideoListCell.xib */,
+				0C46EC9C26403B4200B565CF /* AttensionCollectionViewCell.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -374,6 +383,7 @@
 				0C0EBA3E263B12A60094C2CC /* Assets.xcassets in Resources */,
 				0C5A2D16263EDE8700EF0F16 /* Library.storyboard in Resources */,
 				0C03F3BE263D86A700202A55 /* BaseTabBar.storyboard in Resources */,
+				0C46EC9D26403B4200B565CF /* AttensionCollectionViewCell.xib in Resources */,
 				0C5A2D07263EDDC900EF0F16 /* Search.storyboard in Resources */,
 				0C0EBA3C263B12A20094C2CC /* Home.storyboard in Resources */,
 				0C5A2D11263EDE7300EF0F16 /* Inbox.storyboard in Resources */,
@@ -505,6 +515,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C0EBA39263B12A20094C2CC /* ViewController.swift in Sources */,
+				0C46EC9826403AD500B565CF /* AttensionCollectionViewCell.swift in Sources */,
+				0C46EC90264032CB00B565CF /* AttensionCell.swift in Sources */,
 				0C3C1FAF263C0D6100238732 /* API.swift in Sources */,
 				0CCA74A6263BD52A00C33606 /* Channel.swift in Sources */,
 				0C03F3C9263D88B200202A55 /* BaseTabBarController.swift in Sources */,

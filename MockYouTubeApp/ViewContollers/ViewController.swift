@@ -23,20 +23,24 @@ class ViewController: UIViewController {
     private let headerMoveHeight: CGFloat = 7
     
     private let cellId = "cellId"
+    private let attentionCellId = "attentionCellId"
     
     private var videoItemsForVC = [Item]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+       setupViews()
+       fetchYouTubeSearchInfo()
+    }
+    
+    private func setupViews(){
         videoListCollectionView.register(UINib(nibName: "VideoListCell", bundle: nil), forCellWithReuseIdentifier: cellId)
+        videoListCollectionView.register(AttensionCell.self, forCellWithReuseIdentifier: attentionCellId)
+
         videoListCollectionView.delegate = self
         videoListCollectionView.dataSource = self
         
         profileImageView.layer.cornerRadius = 20
-        
-       fetchYouTubeSearchInfo()
     }
     
     private func fetchYouTubeSearchInfo(){
@@ -87,39 +91,48 @@ class ViewController: UIViewController {
             self.videoListCollectionView.reloadData()
         }
     }
-//    スクロールを認識させる、動きと合わせてヘッダーのアニメーションを作る
-//    scrollViewを用いる
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        IBで作ったTopを座標取得によって移動させる
-//        座標をマイナスさせることで上に移動可能,スクロールごとにマイナスになる
-//        スクロールするたびに、0.5秒前の位置と比較しつつ上にスクロースしているのか、下にしているのか判断する
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.prevContentOffset = scrollView.contentOffset
-        }
-        
-//        上下方向にスクロール時,動きがおかしくなっているのを直す
-        guard let presentIndexPath = videoListCollectionView.indexPathForItem(at: scrollView.contentOffset) else {return}
-//        下方向時,座標が0の時アニメーションをさせない
-        if scrollView.contentOffset.y < 0 { return }
-//        上方向時:CGポイントからCellの番号を取得し、一番最後のCellになる前にアニメーション表示を止める、カウントは0から始まるため、フルカウントをすると-1をした分の値が最後のcellの位置だが、それよりも前に止めるため-2をして最後から２番目のcellのindexを取得
-        if presentIndexPath.row >= videoItemsForVC.count - 2 {return}
-        
-//        headerをスクロール時に薄くする
-        let alphaRatio = 1 / headerHightConstraint.constant
-        
-//        0.5秒前の値が小さい時(下にスクロールしているとき)　ヘッダーを隠す
-        if self.prevContentOffset.y < scrollView.contentOffset.y {
-            if headerTopConstraint.constant <= -headerHightConstraint.constant{ return }
-                headerTopConstraint.constant -= headerMoveHeight
-            headerVIew.alpha -= alphaRatio * headerMoveHeight
-        } else if self.prevContentOffset.y > scrollView.contentOffset.y {
-//            headrのTopが０になった場合 = 最大値
-            if headerTopConstraint.constant >= 0 {return}
-            headerTopConstraint.constant += headerMoveHeight
-            headerVIew.alpha += alphaRatio * headerMoveHeight
+}
 
-        }
+// MARK:  ScrollView
+extension ViewController {
+    //    スクロールを認識させる、動きと合わせてヘッダーのアニメーションを作る
+    //    scrollViewを用いる
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        headerAnimation(scrollView: scrollView)
     }
+    
+    private func headerAnimation(scrollView: UIScrollView){
+        //        IBで作ったTopを座標取得によって移動させる
+        //        座標をマイナスさせることで上に移動可能,スクロールごとにマイナスになる
+        //        スクロールするたびに、0.5秒前の位置と比較しつつ上にスクロースしているのか、下にしているのか判断する
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.prevContentOffset = scrollView.contentOffset
+                }
+                
+        //        上下方向にスクロール時,動きがおかしくなっているのを直す
+                guard let presentIndexPath = videoListCollectionView.indexPathForItem(at: scrollView.contentOffset) else {return}
+        //        下方向時,座標が0の時アニメーションをさせない
+                if scrollView.contentOffset.y < 0 { return }
+        //        上方向時:CGポイントからCellの番号を取得し、一番最後のCellになる前にアニメーション表示を止める、カウントは0から始まるため、フルカウントをすると-1をした分の値が最後のcellの位置だが、それよりも前に止めるため-2をして最後から２番目のcellのindexを取得
+                if presentIndexPath.row >= videoItemsForVC.count - 2 {return}
+                
+        //        headerをスクロール時に薄くする
+                let alphaRatio = 1 / headerHightConstraint.constant
+                
+        //        0.5秒前の値が小さい時(下にスクロールしているとき)　ヘッダーを隠す
+                if self.prevContentOffset.y < scrollView.contentOffset.y {
+                    if headerTopConstraint.constant <= -headerHightConstraint.constant{ return }
+                        headerTopConstraint.constant -= headerMoveHeight
+                    headerVIew.alpha -= alphaRatio * headerMoveHeight
+                } else if self.prevContentOffset.y > scrollView.contentOffset.y {
+        //            headrのTopが０になった場合 = 最大値
+                    if headerTopConstraint.constant >= 0 {return}
+                    headerTopConstraint.constant += headerMoveHeight
+                    headerVIew.alpha += alphaRatio * headerMoveHeight
+
+                }
+    }
+    
 //    スクロールを途中で止めたときのheaderのアニメーション
 //    挙動がまだおかしいときはscrollViewDidEndDragging,scrollViewDidEndDecelerating二つのメソッドが同時に呼び出されてしまっているから
     
@@ -130,6 +143,7 @@ class ViewController: UIViewController {
         }
     }
     
+//    スクロールが止まったときに呼ばれる
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         headerViewEndAnimation()
     }
@@ -152,27 +166,40 @@ class ViewController: UIViewController {
                 }
             
     }
-    
 }
-
     
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = self.view.frame.width
-        return .init(width: width, height: width)
+        
+        if indexPath.row == 2 {
+            return .init(width: width, height: 200)
+        } else {
+            return .init(width: width, height: width)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videoItemsForVC.count
+        return videoItemsForVC.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.row == 2 {
+            let cell = videoListCollectionView.dequeueReusableCell(withReuseIdentifier: attentionCellId, for: indexPath) as! AttensionCell
+            return cell
+        } else {
         let cell = videoListCollectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! VideoListCell
-        cell.videoItemForCV = videoItemsForVC[indexPath.row]
-        return cell
+            
+            if self.videoItemsForVC.count == 0 {return cell}
+            
+            if indexPath.row > 2 {
+                cell.videoItemForCV = videoItemsForVC[indexPath.row - 1]
+            } else {
+                cell.videoItemForCV = videoItemsForVC[indexPath.row]
+            }
+            return cell
+        }
     }
-    
-    
 }
