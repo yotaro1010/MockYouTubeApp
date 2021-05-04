@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 
-class ViewController: UIViewController {
+class VideoListController: UIViewController {
 
     @IBOutlet weak var headerVIew: UIView!
     @IBOutlet weak var headerHightConstraint: NSLayoutConstraint!
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
 }
 
 // MARK:  ScrollView
-extension ViewController {
+extension VideoListController {
     //    スクロールを認識させる、動きと合わせてヘッダーのアニメーションを作る
     //    scrollViewを用いる
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -168,7 +168,7 @@ extension ViewController {
     }
 }
     
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
+extension VideoListController: UICollectionViewDelegate, UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -188,6 +188,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource ,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 2 {
             let cell = videoListCollectionView.dequeueReusableCell(withReuseIdentifier: attentionCellId, for: indexPath) as! AttensionCell
+            cell.videoItemsForAC = self.videoItemsForVC
             return cell
         } else {
         let cell = videoListCollectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! VideoListCell
@@ -201,5 +202,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource ,
             }
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let videoVC = UIStoryboard(name: "Video", bundle: nil).instantiateViewController(identifier: "VideoViewController") as VideoViewController
+        videoVC.modalPresentationStyle = .fullScreen
+        self.present(videoVC, animated: true, completion: nil)
     }
 }

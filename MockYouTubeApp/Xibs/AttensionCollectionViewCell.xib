@@ -27,7 +27,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dxc-5z-3vR">
                         <rect key="frame" x="0.0" y="100" width="373" height="80"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ビデオのタイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZQ-q7-4Rm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ビデオのタイトル" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZQ-q7-4Rm">
                                 <rect key="frame" x="0.0" y="0.0" width="373" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dxu-9D-iJg"/>
@@ -68,7 +68,10 @@
             </collectionViewCellContentView>
             <size key="customSize" width="373" height="318"/>
             <connections>
+                <outlet property="channelTitleLabel" destination="XFa-s1-GEj" id="eAi-hR-Pot"/>
+                <outlet property="discriptionLabel" destination="s9x-fP-4bn" id="cC6-13-WQD"/>
                 <outlet property="thumbnailImageView" destination="qIc-6V-wwQ" id="MJA-pS-95L"/>
+                <outlet property="videoTitleLabel" destination="bZQ-q7-4Rm" id="y3y-hd-JPi"/>
             </connections>
             <point key="canvasLocation" x="39.855072463768117" y="78.348214285714278"/>
         </collectionViewCell>

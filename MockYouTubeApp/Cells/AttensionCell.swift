@@ -10,6 +10,7 @@ import UIKit
 class AttensionCell: UICollectionViewCell {
     
     private let attensionId = "attensionId"
+    var videoItemsForAC = [Item]()
     
     lazy var attentionColllectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,6 +52,7 @@ extension AttensionCell: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = attentionColllectionView.dequeueReusableCell(withReuseIdentifier: attensionId, for: indexPath) as! AttensionCollectionViewCell
+        cell.videoItemForACVC = videoItemsForAC[indexPath.row]
         return cell
     }
 }
