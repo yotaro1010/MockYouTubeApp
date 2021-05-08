@@ -20,9 +20,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jJv-Um-SNU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FGB-N2-lyv">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YxK-Q6-lZB">
@@ -111,19 +110,24 @@
                         <viewLayoutGuide key="safeArea" id="299-DV-Jwk"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="EGm-Pz-3Ze" firstAttribute="leading" secondItem="YxK-Q6-lZB" secondAttribute="leading" id="1ho-nL-9aC"/>
+                            <constraint firstItem="EGm-Pz-3Ze" firstAttribute="leading" secondItem="299-DV-Jwk" secondAttribute="leading" id="1ho-nL-9aC"/>
                             <constraint firstItem="EGm-Pz-3Ze" firstAttribute="trailing" secondItem="YxK-Q6-lZB" secondAttribute="trailing" id="3wl-ix-Gti"/>
+                            <constraint firstItem="FGB-N2-lyv" firstAttribute="trailing" secondItem="EGm-Pz-3Ze" secondAttribute="trailing" id="52m-E9-sIl"/>
                             <constraint firstAttribute="trailing" secondItem="6yM-3y-LHU" secondAttribute="trailing" id="7NP-nu-38b"/>
                             <constraint firstItem="299-DV-Jwk" firstAttribute="trailing" secondItem="YxK-Q6-lZB" secondAttribute="trailing" id="7vM-Hf-UB2"/>
                             <constraint firstItem="6yM-3y-LHU" firstAttribute="top" secondItem="7XA-RR-uKg" secondAttribute="top" id="9BM-74-XBd"/>
                             <constraint firstItem="EGm-Pz-3Ze" firstAttribute="top" secondItem="YxK-Q6-lZB" secondAttribute="bottom" id="9Fu-HW-ayi"/>
+                            <constraint firstItem="FGB-N2-lyv" firstAttribute="top" secondItem="299-DV-Jwk" secondAttribute="top" id="BA9-Ff-IAC"/>
                             <constraint firstAttribute="bottom" secondItem="6yM-3y-LHU" secondAttribute="bottom" id="MVH-ee-FQM"/>
                             <constraint firstItem="YxK-Q6-lZB" firstAttribute="top" secondItem="299-DV-Jwk" secondAttribute="top" id="Vd0-fo-BAT"/>
+                            <constraint firstItem="FGB-N2-lyv" firstAttribute="leading" secondItem="EGm-Pz-3Ze" secondAttribute="leading" id="aMS-r7-3cD"/>
                             <constraint firstItem="YxK-Q6-lZB" firstAttribute="leading" secondItem="299-DV-Jwk" secondAttribute="leading" id="g3Q-ET-1bc"/>
                             <constraint firstItem="6yM-3y-LHU" firstAttribute="leading" secondItem="YxK-Q6-lZB" secondAttribute="leading" id="tIa-A8-IDb"/>
+                            <constraint firstItem="FGB-N2-lyv" firstAttribute="bottom" secondItem="6yM-3y-LHU" secondAttribute="bottom" id="yoj-b0-5m6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backView" destination="FGB-N2-lyv" id="OeO-uJ-Aay"/>
                         <outlet property="baseBacgroundView" destination="6yM-3y-LHU" id="I90-VL-kWI"/>
                         <outlet property="channelImageView" destination="Ujg-1N-I6V" id="SC8-nG-7qF"/>
                         <outlet property="channelTitleLabel" destination="9Y5-aZ-RMa" id="RQd-HD-0Ra"/>

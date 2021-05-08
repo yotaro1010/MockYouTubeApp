@@ -24,7 +24,8 @@ class VideoViewController: UIViewController {
     @IBOutlet weak var channelImageView: UIImageView!
     @IBOutlet weak var channelTitleLabel: UILabel!
     
-//　viewDidAppearは全部のviewが呼ばれた後に呼ばれる,全てのviewが呼ばれたのちにalphaを1に戻す
+    @IBOutlet weak var backView: UIView!
+    //　viewDidAppearは全部のviewが呼ばれた後に呼ばれる,全てのviewが呼ばれたのちにalphaを1に戻す
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
