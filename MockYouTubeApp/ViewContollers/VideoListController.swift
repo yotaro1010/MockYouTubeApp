@@ -207,7 +207,19 @@ extension VideoListController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let videoVC = UIStoryboard(name: "Video", bundle: nil).instantiateViewController(identifier: "VideoViewController") as VideoViewController
-        videoVC.modalPresentationStyle = .fullScreen
+        
+//        このままタップしてもindexPathの取得がずれているため違う情報がcellに渡されてしまうので座標を-1する
+        
+//        if indexPath.row > 2 {
+//            videoVC.selectedItemForVVC = videoItemsForVC[indexPath.row - 1]
+//        } else {
+//            videoVC.selectedItemForVVC = videoItemsForVC[indexPath.row]
+//        }
+        
+//         参考演算子を使う コードが減る　当てはまる場合は ? それ以外は :
+        videoVC.selectedItemForVVC = indexPath.row > 2 ? videoItemsForVC[indexPath.row - 1] :
+            videoItemsForVC[indexPath.row]
+        
         self.present(videoVC, animated: true, completion: nil)
     }
 }
