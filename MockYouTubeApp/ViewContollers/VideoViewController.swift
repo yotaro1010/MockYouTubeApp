@@ -24,6 +24,13 @@ class VideoViewController: UIViewController {
     @IBOutlet weak var channelImageView: UIImageView!
     @IBOutlet weak var channelTitleLabel: UILabel!
     
+   
+    @IBOutlet weak var videoImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var videoImageViewTrailingConstraint: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var videoImageViewLeadingConstraint: NSLayoutConstraint!
+//
     @IBOutlet weak var backView: UIView!
     //　viewDidAppearは全部のviewが呼ばれた後に呼ばれる,全てのviewが呼ばれたのちにalphaを1に戻す
     override func viewDidAppear(_ animated: Bool) {
@@ -61,6 +68,26 @@ class VideoViewController: UIViewController {
             
 //            GRの動きをつける、縦に動かすときはY軸を使う
             iv.transform = CGAffineTransform(translationX: 0, y: move.y)
+            
+            
+//            左右のパディング
+            let movingConstant = move.y / 30
+            if movingConstant <= 12 {
+                videoImageViewTrailingConstraint.constant = -movingConstant
+                videoImageViewLeadingConstraint.constant = movingConstant
+            }
+            
+//            ivの高さの動き
+//            高さ 280(最大値)  - 70(最小値) = 210
+            let parantViewHeight = self.view.frame.height
+            let heightRatio = 210 / (parantViewHeight - (parantViewHeight / 6))
+            let moveHeight = move.y * heightRatio
+            videoImageViewHeightConstraint.constant = 280 - moveHeight
+            
+//            ivの横幅の動き 150(最小値)
+            let originalWidth = self.view.frame.width
+            
+ 
             
         } else if gesture.state == .ended {
             

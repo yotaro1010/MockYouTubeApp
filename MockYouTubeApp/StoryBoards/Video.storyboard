@@ -111,10 +111,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="EGm-Pz-3Ze" firstAttribute="leading" secondItem="299-DV-Jwk" secondAttribute="leading" id="1ho-nL-9aC"/>
-                            <constraint firstItem="EGm-Pz-3Ze" firstAttribute="trailing" secondItem="YxK-Q6-lZB" secondAttribute="trailing" id="3wl-ix-Gti"/>
+                            <constraint firstItem="EGm-Pz-3Ze" firstAttribute="trailing" secondItem="299-DV-Jwk" secondAttribute="trailing" id="3wl-ix-Gti"/>
                             <constraint firstItem="FGB-N2-lyv" firstAttribute="trailing" secondItem="EGm-Pz-3Ze" secondAttribute="trailing" id="52m-E9-sIl"/>
                             <constraint firstAttribute="trailing" secondItem="6yM-3y-LHU" secondAttribute="trailing" id="7NP-nu-38b"/>
-                            <constraint firstItem="299-DV-Jwk" firstAttribute="trailing" secondItem="YxK-Q6-lZB" secondAttribute="trailing" id="7vM-Hf-UB2"/>
+                            <constraint firstItem="YxK-Q6-lZB" firstAttribute="trailing" secondItem="299-DV-Jwk" secondAttribute="trailing" id="7vM-Hf-UB2"/>
                             <constraint firstItem="6yM-3y-LHU" firstAttribute="top" secondItem="7XA-RR-uKg" secondAttribute="top" id="9BM-74-XBd"/>
                             <constraint firstItem="EGm-Pz-3Ze" firstAttribute="top" secondItem="YxK-Q6-lZB" secondAttribute="bottom" id="9Fu-HW-ayi"/>
                             <constraint firstItem="FGB-N2-lyv" firstAttribute="top" secondItem="299-DV-Jwk" secondAttribute="top" id="BA9-Ff-IAC"/>
@@ -132,6 +132,9 @@
                         <outlet property="channelImageView" destination="Ujg-1N-I6V" id="SC8-nG-7qF"/>
                         <outlet property="channelTitleLabel" destination="9Y5-aZ-RMa" id="RQd-HD-0Ra"/>
                         <outlet property="videoImageView" destination="YxK-Q6-lZB" id="c7c-cy-T9G"/>
+                        <outlet property="videoImageViewHeightConstraint" destination="mFJ-Ob-VLi" id="Ykg-uu-4xQ"/>
+                        <outlet property="videoImageViewLeadingConstraint" destination="g3Q-ET-1bc" id="IXG-b8-tPF"/>
+                        <outlet property="videoImageViewTrailingConstraint" destination="7vM-Hf-UB2" id="nRS-ui-T6x"/>
                         <outlet property="videoTitleLabel" destination="RW4-Vd-gzk" id="y4C-ch-8ci"/>
                     </connections>
                 </viewController>
