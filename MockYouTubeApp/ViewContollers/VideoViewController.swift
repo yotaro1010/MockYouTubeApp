@@ -10,11 +10,21 @@ import Nuke
 
 class VideoViewController: UIViewController {
     
-    var selectedItemForVVC: Item? 
+    var selectedItemForVVC: Item?
     
+    private var imageViewCenterY: CGFloat?
     
+//　下方向にスワイプ時の領域最大値を決める safeAreaを除外
+    var videoImageMaxY: CGFloat {
+        
+        let excludeValue = view.safeAreaInsets.bottom + (imageViewCenterY ?? 0)
+        return view.frame.maxY - excludeValue
+    }
     
     @IBOutlet weak var baseBacgroundView: UIView!
+    //    @IBOutlet weak var baseBacgroundView: UIView!
+    
+//    @IBOutlet weak var baseBacgroundView: UIView!
     
     @IBOutlet weak var videoTitleLabel: UILabel!
     @IBOutlet weak var channelImageView: UIImageView!
@@ -25,13 +35,18 @@ class VideoViewController: UIViewController {
     @IBOutlet weak var videoImageViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var videoImageViewLeadingConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var videoImageBackView: UIView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var backViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var backViewTrailingConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var discribeView: UIView!
-    @IBOutlet weak var discribeViewTopConstraint: NSLayoutConstraint!
+    //    @IBOutlet weak var discribeView: UIView!
+//    @IBOutlet weak var discribeViewTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var discribeViewTopConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -54,6 +69,8 @@ class VideoViewController: UIViewController {
     }
     
     private func setupViews(){
+        self.view.bringSubviewToFront(videoImageView)
+        imageViewCenterY = videoImageView.center.y
         channelImageView.layer.cornerRadius = 45 / 2
         
         if let url = URL(string: selectedItemForVVC?.snippet.thumbnails.medium.url ?? ""){
@@ -73,22 +90,28 @@ class VideoViewController: UIViewController {
         videoImageView.addGestureRecognizer(panGesture)
     }
     @objc private func panVideoImageView(gesture: UIPanGestureRecognizer){
+        
         guard let iv = gesture.view else {return}
         let move = gesture.translation(in: iv)
         
         if gesture.state == .changed {
             
+            if videoImageMaxY <= move.y {
+                moveToBottom(imageView: iv as! UIImageView)
+                return
+            }
 //            GRの動きをつける、縦に動かすときはY軸を使う
             iv.transform = CGAffineTransform(translationX: 0, y: move.y)
-            
+            videoImageBackView.transform = CGAffineTransform(translationX: 0, y: move.y)
             
 //            左右のパディング
             let movingConstant = move.y / 30
+            
             if movingConstant <= 12 {
                 videoImageViewTrailingConstraint.constant = -movingConstant
                 videoImageViewLeadingConstraint.constant = movingConstant
                 
-//                backViewTrailingConstraint.constant = -movingConstant
+                backViewTrailingConstraint.constant = -movingConstant
             }
             
 //            ivの高さの動き
@@ -97,13 +120,20 @@ class VideoViewController: UIViewController {
             let heightRatio = 210 / (parantViewHeight - (parantViewHeight / 6))
             let moveHeight = move.y * heightRatio
             
-//            backViewTopConstraint.constant = move.y
+            backViewTopConstraint.constant = move.y
             videoImageViewHeightConstraint.constant = 280 - moveHeight
-//            discribeViewTopConstraint.constant = move.y
+            discribeViewTopConstraint.constant = move.y * 0.8
+            
+            
+            let bottomMoveY = parantViewHeight - videoImageMaxY
+            let bottomMoveRatio = bottomMoveY / videoImageMaxY
+            let bottomMoveConstant = move.y * bottomMoveRatio
+            backViewBottomConstraint.constant = bottomMoveConstant
+             
             
 //            alpha値の設定
-//            let alphaRatio = move.y / (parantViewHeight / 2)
-//             discribeView.alpha = 1 - alphaRatio
+            let alphaRatio = move.y / (parantViewHeight / 2)
+             discribeView.alpha = 1 - alphaRatio
 //
 //            ivの横幅の動き 150(最小値)
             let originalWidth = self.view.frame.width
@@ -117,7 +147,7 @@ class VideoViewController: UIViewController {
                 return
             }
             
-            if constant < 12 {
+            if constant < -12 {
                 videoImageViewTrailingConstraint.constant = constant
             }
             
@@ -134,6 +164,13 @@ class VideoViewController: UIViewController {
             
         }
         print("gesture.translation:", gesture.translation(in: iv))
+    }
+    
+//    一番したにvideoImageViewが行った時のbottomの確定するメソッド、ズレを防ぐため
+    private func moveToBottom(imageView:UIImageView){
+        imageView.transform = CGAffineTransform(translationX: 0, y: videoImageMaxY)
+        backView.transform = CGAffineTransform(translationX: 0, y: videoImageMaxY)
+        videoImageBackView.transform = CGAffineTransform(translationX: 0, y: videoImageMaxY)
     }
     
     private func backToIdentityAllViews(iv: UIImageView){
