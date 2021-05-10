@@ -13,25 +13,37 @@ class VideoViewController: UIViewController {
     var selectedItemForVVC: Item? 
     
     
+    
     @IBOutlet weak var baseBacgroundView: UIView!
     
+    @IBOutlet weak var videoTitleLabel: UILabel!
+    @IBOutlet weak var channelImageView: UIImageView!
+    @IBOutlet weak var channelTitleLabel: UILabel!
+   
     @IBOutlet weak var videoImageView: UIImageView!
+    @IBOutlet weak var videoImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var videoImageViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var videoImageViewLeadingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var backViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backViewTrailingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var discribeView: UIView!
+    @IBOutlet weak var discribeViewTopConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
-    @IBOutlet weak var videoTitleLabel: UILabel!
-    @IBOutlet weak var channelImageView: UIImageView!
-    @IBOutlet weak var channelTitleLabel: UILabel!
     
    
-    @IBOutlet weak var videoImageViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var videoImageViewTrailingConstraint: NSLayoutConstraint!
     
     
-    @IBOutlet weak var videoImageViewLeadingConstraint: NSLayoutConstraint!
+    
+   
 //
-    @IBOutlet weak var backView: UIView!
+   
     //　viewDidAppearは全部のviewが呼ばれた後に呼ばれる,全てのviewが呼ばれたのちにalphaを1に戻す
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -75,6 +87,8 @@ class VideoViewController: UIViewController {
             if movingConstant <= 12 {
                 videoImageViewTrailingConstraint.constant = -movingConstant
                 videoImageViewLeadingConstraint.constant = movingConstant
+                
+//                backViewTrailingConstraint.constant = -movingConstant
             }
             
 //            ivの高さの動き
@@ -82,10 +96,30 @@ class VideoViewController: UIViewController {
             let parantViewHeight = self.view.frame.height
             let heightRatio = 210 / (parantViewHeight - (parantViewHeight / 6))
             let moveHeight = move.y * heightRatio
-            videoImageViewHeightConstraint.constant = 280 - moveHeight
             
+//            backViewTopConstraint.constant = move.y
+            videoImageViewHeightConstraint.constant = 280 - moveHeight
+//            discribeViewTopConstraint.constant = move.y
+            
+//            alpha値の設定
+//            let alphaRatio = move.y / (parantViewHeight / 2)
+//             discribeView.alpha = 1 - alphaRatio
+//
 //            ivの横幅の動き 150(最小値)
             let originalWidth = self.view.frame.width
+//            12はすでにspacingを与えている分
+            let minimumImageViewTrailingConstant = -(originalWidth - (150 + 12))
+            let constant = originalWidth - move.y
+            
+//            最小値に行ったら動きをやめる
+            if minimumImageViewTrailingConstant > constant {
+                videoImageViewTrailingConstraint.constant = minimumImageViewTrailingConstant
+                return
+            }
+            
+            if constant < 12 {
+                videoImageViewTrailingConstraint.constant = constant
+            }
             
  
             
@@ -93,16 +127,23 @@ class VideoViewController: UIViewController {
             
             
             UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: []) {
-                
-                iv.transform = .identity
-                self.view.layoutIfNeeded()
-                
+                self.backToIdentityAllViews(iv: iv as! UIImageView)
             }
 
             
             
         }
-        print("gesture.translation:", gesture.translation(in: iv ))
+        print("gesture.translation:", gesture.translation(in: iv))
+    }
+    
+    private func backToIdentityAllViews(iv: UIImageView){
+        iv.transform = .identity
+        
+        self.videoImageViewHeightConstraint.constant = 280
+        self.videoImageViewLeadingConstraint.constant = 0
+        self.videoImageViewTrailingConstraint.constant = 0
+        
+        self.view.layoutIfNeeded()
     }
     
 }
