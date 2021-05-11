@@ -21,11 +21,15 @@ class VideoViewController: UIViewController {
         return view.frame.maxY - excludeValue
     }
     
+    var minimumImageViewTrailingConstant: CGFloat {
+        -(view.frame.width - (150 + 12))
+    }
+    
+
+
+    
     @IBOutlet weak var baseBacgroundView: UIView!
-    //    @IBOutlet weak var baseBacgroundView: UIView!
-    
-//    @IBOutlet weak var baseBacgroundView: UIView!
-    
+  
     @IBOutlet weak var videoTitleLabel: UILabel!
     @IBOutlet weak var channelImageView: UIImageView!
     @IBOutlet weak var channelTitleLabel: UILabel!
@@ -39,12 +43,10 @@ class VideoViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var backViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var backViewTrailingConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var discribeView: UIView!
-    //    @IBOutlet weak var discribeView: UIView!
-//    @IBOutlet weak var discribeViewTopConstraint: NSLayoutConstraint!
+ 
     
     @IBOutlet weak var discribeViewTopConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -134,11 +136,11 @@ class VideoViewController: UIViewController {
 //            alpha値の設定
             let alphaRatio = move.y / (parantViewHeight / 2)
              discribeView.alpha = 1 - alphaRatio
+            baseBacgroundView.alpha = 1 - alphaRatio
 //
 //            ivの横幅の動き 150(最小値)
             let originalWidth = self.view.frame.width
 //            12はすでにspacingを与えている分
-            let minimumImageViewTrailingConstant = -(originalWidth - (150 + 12))
             let constant = originalWidth - move.y
             
 //            最小値に行ったら動きをやめる
@@ -155,10 +157,18 @@ class VideoViewController: UIViewController {
             
         } else if gesture.state == .ended {
             
-            
-            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: []) {
-                self.backToIdentityAllViews(iv: iv as! UIImageView)
+            if move.y < self.view.frame.height / 3 {
+                UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: []) {
+                    self.backToIdentityAllViews(iv: iv as! UIImageView)
+                }
+            }else {
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8 , options: []) {
+                    self.moveToBottom(imageView: iv as! UIImageView)
+                }
+
             }
+            
+            
 
             
             
@@ -168,17 +178,41 @@ class VideoViewController: UIViewController {
     
 //    一番したにvideoImageViewが行った時のbottomの確定するメソッド、ズレを防ぐため
     private func moveToBottom(imageView:UIImageView){
+        
+//        ivの設定
         imageView.transform = CGAffineTransform(translationX: 0, y: videoImageMaxY)
-        backView.transform = CGAffineTransform(translationX: 0, y: videoImageMaxY)
+        videoImageViewTrailingConstraint.constant = minimumImageViewTrailingConstant
+        videoImageViewHeightConstraint.constant = 70
+        
         videoImageBackView.transform = CGAffineTransform(translationX: 0, y: videoImageMaxY)
+        discribeView.alpha = 0
+        backView.alpha = 0
+        
+        baseBacgroundView.alpha = 0
+        
+        self.view.layoutIfNeeded()
     }
     
     private func backToIdentityAllViews(iv: UIImageView){
+        //        ivの設定
         iv.transform = .identity
         
-        self.videoImageViewHeightConstraint.constant = 280
-        self.videoImageViewLeadingConstraint.constant = 0
-        self.videoImageViewTrailingConstraint.constant = 0
+        videoImageViewHeightConstraint.constant = 280
+        videoImageViewLeadingConstraint.constant = 0
+        videoImageViewTrailingConstraint.constant = 0
+        
+        //        backViewの設定
+        backViewTrailingConstraint.constant = 0
+        backViewBottomConstraint.constant = 0
+        backViewTopConstraint.constant = 0
+        backView.alpha = 1
+        
+        //        discribeViewの設定
+        discribeViewTopConstraint.constant = 0
+        discribeView.alpha = 1
+        
+        //        basebackGroundViewの設定
+        baseBacgroundView.alpha = 1
         
         self.view.layoutIfNeeded()
     }
