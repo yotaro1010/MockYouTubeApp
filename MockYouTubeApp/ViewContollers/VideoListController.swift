@@ -17,7 +17,11 @@ class VideoListController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var videoListCollectionView: UICollectionView!
     
-//    0.5秒前にスクロールした位置
+    
+    @IBOutlet weak var bottomVideoView: UIView!
+    @IBOutlet weak var bottomVideoImageView: UIImageView!
+    
+    //    0.5秒前にスクロールした位置
     private var prevContentOffset: CGPoint = .init(x: 0, y: 0)
 //    headerを表示させるスピード
     private let headerMoveHeight: CGFloat = 7
@@ -31,9 +35,22 @@ class VideoListController: UIViewController {
         super.viewDidLoad()
        setupViews()
        fetchYouTubeSearchInfo()
+        NotificationCenter.default.addObserver(self, selector: #selector(showThumbnail), name: .init("thumbnailImage"), object: nil)
+    }
+    
+    @objc private func showThumbnail(notification: NSNotification){
+        
+        bottomVideoView.isHidden = false 
+        
+        guard let userInfo = notification.userInfo as? [String: UIImage] else {return}
+        let image = userInfo["image"]
+        bottomVideoImageView.image = image
+        
+        
     }
     
     private func setupViews(){
+        
         videoListCollectionView.register(UINib(nibName: "VideoListCell", bundle: nil), forCellWithReuseIdentifier: cellId)
         videoListCollectionView.register(AttensionCell.self, forCellWithReuseIdentifier: attentionCellId)
 
@@ -41,6 +58,8 @@ class VideoListController: UIViewController {
         videoListCollectionView.dataSource = self
         
         profileImageView.layer.cornerRadius = 20
+        
+        bottomVideoView.isHidden = true
     }
     
     private func fetchYouTubeSearchInfo(){
@@ -216,10 +235,19 @@ extension VideoListController: UICollectionViewDelegate, UICollectionViewDataSou
 //            videoVC.selectedItemForVVC = videoItemsForVC[indexPath.row]
 //        }
         
-//         参考演算子を使う コードが減る　当てはまる場合は ? それ以外は :
-        videoVC.selectedItemForVVC = indexPath.row > 2 ? videoItemsForVC[indexPath.row - 1] :
-            videoItemsForVC[indexPath.row]
+        if videoItemsForVC.count == 0 {
+            
+            videoVC.selectedItemForVVC = nil
+            
+        } else {
+            
+            //         参考演算子を使う コードが減る　当てはまる場合は ? それ以外は :
+            videoVC.selectedItemForVVC = indexPath.row > 2 ? videoItemsForVC[indexPath.row - 1] :
+                videoItemsForVC[indexPath.row]
+        }
         
+        bottomVideoView.isHidden = true
         self.present(videoVC, animated: true, completion: nil)
+        
     }
 }

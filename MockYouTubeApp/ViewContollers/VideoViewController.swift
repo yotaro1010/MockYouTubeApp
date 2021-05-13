@@ -46,21 +46,13 @@ class VideoViewController: UIViewController {
     @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var discribeView: UIView!
- 
-    
     @IBOutlet weak var discribeViewTopConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
     
-   
-    
-    
-    
-   
-//
-   
     //　viewDidAppearは全部のviewが呼ばれた後に呼ばれる,全てのviewが呼ばれたのちにalphaを1に戻す
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -106,72 +98,99 @@ class VideoViewController: UIViewController {
             iv.transform = CGAffineTransform(translationX: 0, y: move.y)
             videoImageBackView.transform = CGAffineTransform(translationX: 0, y: move.y)
             
-//            左右のパディング
-            let movingConstant = move.y / 30
+            self.adjustPaddingChange(move: move)
             
-            if movingConstant <= 12 {
-                videoImageViewTrailingConstraint.constant = -movingConstant
-                videoImageViewLeadingConstraint.constant = movingConstant
-                
-                backViewTrailingConstraint.constant = -movingConstant
-            }
+            self.adjustHeightChange(move: move)
             
-//            ivの高さの動き
-//            高さ 280(最大値)  - 70(最小値) = 210
-            let parantViewHeight = self.view.frame.height
-            let heightRatio = 210 / (parantViewHeight - (parantViewHeight / 6))
-            let moveHeight = move.y * heightRatio
+            self.adjustHeightChange(move: move)
             
-            backViewTopConstraint.constant = move.y
-            videoImageViewHeightConstraint.constant = 280 - moveHeight
-            discribeViewTopConstraint.constant = move.y * 0.8
+            self.adjustAlphaChange(move: move)
             
-            
-            let bottomMoveY = parantViewHeight - videoImageMaxY
-            let bottomMoveRatio = bottomMoveY / videoImageMaxY
-            let bottomMoveConstant = move.y * bottomMoveRatio
-            backViewBottomConstraint.constant = bottomMoveConstant
-             
-            
-//            alpha値の設定
-            let alphaRatio = move.y / (parantViewHeight / 2)
-             discribeView.alpha = 1 - alphaRatio
-            baseBacgroundView.alpha = 1 - alphaRatio
-//
-//            ivの横幅の動き 150(最小値)
-            let originalWidth = self.view.frame.width
-//            12はすでにspacingを与えている分
-            let constant = originalWidth - move.y
-            
-//            最小値に行ったら動きをやめる
-            if minimumImageViewTrailingConstant > constant {
-                videoImageViewTrailingConstraint.constant = minimumImageViewTrailingConstant
-                return
-            }
-            
-            if constant < -12 {
-                videoImageViewTrailingConstraint.constant = constant
-            }
-            
- 
-            
+            self.adjustSlideMove(move: move)
+    
         } else if gesture.state == .ended {
-            
-            if move.y < self.view.frame.height / 3 {
-                UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: []) {
-                    self.backToIdentityAllViews(iv: iv as! UIImageView)
-                }
-            }else {
-                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+            self.imageViewEndedAnimation(move: move, imageView: iv as! UIImageView)
+        }
+    }
+    
+    
+// MARK: imageのpangestureのstatusが[.change]の時の動き
+    private func adjustPaddingChange(move: CGPoint){
+        let movingConstant = move.y / 30
+
+        if movingConstant <= 12 {
+            videoImageViewTrailingConstraint.constant = -movingConstant
+            videoImageViewLeadingConstraint.constant = movingConstant
+
+            backViewTrailingConstraint.constant = -movingConstant
+        }
+    }
+    
+    private func adjustHeightChange(move: CGPoint){
+        let parantViewHeight = self.view.frame.height
+        let heightRatio = 210 / (parantViewHeight - (parantViewHeight / 6))
+        let moveHeight = move.y * heightRatio
+        
+        backViewTopConstraint.constant = move.y
+        videoImageViewHeightConstraint.constant = 280 - moveHeight
+        discribeViewTopConstraint.constant = move.y * 0.8
+        
+        
+        let bottomMoveY = parantViewHeight - videoImageMaxY
+        let bottomMoveRatio = bottomMoveY / videoImageMaxY
+        let bottomMoveConstant = move.y * bottomMoveRatio
+        backViewBottomConstraint.constant = bottomMoveConstant
+    }
+    
+    private func adjustAlphaChange(move: CGPoint){
+        //            alpha値の設定
+                    let alphaRatio = move.y / (self.view.frame.height / 2)
+                     discribeView.alpha = 1 - alphaRatio
+                    baseBacgroundView.alpha = 1 - alphaRatio
+    }
+    
+    private func adjustSlideMove(move: CGPoint){
+        //            ivの横幅の動き 150(最小値)
+                    let originalWidth = self.view.frame.width
+        //            12はすでにspacingを与えている分
+                    let constant = originalWidth - move.y
                     
-                    self.moveToBottom(imageView: iv as! UIImageView)
+        //            最小値に行ったら動きをやめる
+                    if minimumImageViewTrailingConstant > constant {
+                        videoImageViewTrailingConstraint.constant = minimumImageViewTrailingConstant
+                        return
+                    }
                     
-                } completion: { _ in
-                    
+                    if constant < -12 {
+                        videoImageViewTrailingConstraint.constant = constant
+                    }
+    }
+    
+// MARK: imageのpangestureのstatusが[.ended]の時の動き
+    private func imageViewEndedAnimation(move: CGPoint, imageView: UIImageView){
+        if move.y < self.view.frame.height / 3 {
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: []) {
+                self.backToIdentityAllViews(iv:imageView)
+            }
+        }else {
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+                
+                self.moveToBottom(imageView: imageView)
+                
+            } completion: { _ in
+                
+                UIView.animate(withDuration: 0.2) {
                     self.videoImageView.isHidden = true
                     self.videoImageBackView.isHidden = true
-                    self.dismiss(animated: false, completion: nil)
                     
+                    let image = self.videoImageView.image
+                    let userInfo: [String: UIImage?] = ["image": image]
+                    
+                    //                    VideoListCVに情報を渡すためNotificationCenterを使う
+                    NotificationCenter.default.post(name: .init("thumbnailImage"), object: nil, userInfo: userInfo as [AnyHashable : Any])
+                    
+                } completion: { _ in
+                    self.dismiss(animated: false, completion: nil)
                 }
             }
         }
@@ -217,5 +236,5 @@ class VideoViewController: UIViewController {
         
         self.view.layoutIfNeeded()
     }
-    
 }
+

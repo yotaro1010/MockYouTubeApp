@@ -17,13 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpW-HI-aP8">
-                                <rect key="frame" x="12" y="723" width="390" height="70"/>
-                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="WVm-AW-bzH"/>
-                                </constraints>
-                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jpu-Vs-41A">
                                 <rect key="frame" x="0.0" y="104" width="414" height="709"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -33,11 +26,6 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <view key="backgroundView" contentMode="scaleToFill" id="L9c-TS-fBE">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="709"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="U3T-Ad-eZi">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -49,6 +37,24 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfv-tq-pZn">
+                                <rect key="frame" x="12" y="723" width="390" height="70"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2yE-kT-CtT">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="fJh-TN-BPd"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="2yE-kT-CtT" firstAttribute="top" secondItem="Pfv-tq-pZn" secondAttribute="top" id="WhG-Gq-BkS"/>
+                                    <constraint firstItem="2yE-kT-CtT" firstAttribute="leading" secondItem="Pfv-tq-pZn" secondAttribute="leading" id="brv-kc-FZ0"/>
+                                    <constraint firstAttribute="bottom" secondItem="2yE-kT-CtT" secondAttribute="bottom" id="f2l-JS-Cgs"/>
+                                    <constraint firstAttribute="height" constant="70" id="zrX-a5-wsx"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KH7-XZ-W1V">
                                 <rect key="frame" x="0.0" y="44" width="414" height="60"/>
                                 <subviews>
@@ -91,6 +97,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="jzD-Wf-amO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iOM-b9-aac" secondAttribute="trailing" constant="8" symbolic="YES" id="11N-yv-vTr"/>
                                     <constraint firstItem="zMz-Oe-Ynk" firstAttribute="centerY" secondItem="KH7-XZ-W1V" secondAttribute="centerY" id="51F-4V-UK0"/>
                                     <constraint firstAttribute="trailing" secondItem="stL-oN-2IB" secondAttribute="trailing" constant="10" id="Acl-LB-aeN"/>
                                     <constraint firstItem="stL-oN-2IB" firstAttribute="leading" secondItem="NIS-q6-xMS" secondAttribute="trailing" constant="3" id="NDl-fp-bop"/>
@@ -110,19 +117,21 @@
                         <constraints>
                             <constraint firstItem="KH7-XZ-W1V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0Ak-M5-ftC"/>
                             <constraint firstItem="jpu-Vs-41A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6Lw-9K-fV5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RpW-HI-aP8" secondAttribute="bottom" constant="20" id="95j-We-s96"/>
+                            <constraint firstItem="Pfv-tq-pZn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="BfW-Aq-9pu"/>
                             <constraint firstItem="KH7-XZ-W1V" firstAttribute="trailing" secondItem="jpu-Vs-41A" secondAttribute="trailing" id="HPA-Zw-2YE"/>
                             <constraint firstItem="jpu-Vs-41A" firstAttribute="top" secondItem="KH7-XZ-W1V" secondAttribute="bottom" id="HwL-1V-gyr"/>
                             <constraint firstItem="KH7-XZ-W1V" firstAttribute="leading" secondItem="jpu-Vs-41A" secondAttribute="leading" id="KZ7-iH-a8t"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RpW-HI-aP8" secondAttribute="trailing" constant="12" id="N4F-pW-hCx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jpu-Vs-41A" secondAttribute="bottom" id="af7-oQ-NZT"/>
-                            <constraint firstItem="RpW-HI-aP8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="doI-Ob-AnM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Pfv-tq-pZn" secondAttribute="trailing" constant="12" id="vas-QX-8In"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Pfv-tq-pZn" secondAttribute="bottom" constant="20" id="w6S-bB-XQ8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jpu-Vs-41A" secondAttribute="trailing" id="wGH-gt-Fld"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="ame-Pa-7tU"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="bottomVideoImageView" destination="2yE-kT-CtT" id="5QL-ya-PM8"/>
+                        <outlet property="bottomVideoView" destination="Pfv-tq-pZn" id="nyf-yT-boO"/>
                         <outlet property="headerHightConstraint" destination="dwH-AQ-mZt" id="HEk-Bs-GLv"/>
                         <outlet property="headerTopConstraint" destination="0Ak-M5-ftC" id="JHx-ox-93F"/>
                         <outlet property="headerVIew" destination="KH7-XZ-W1V" id="X9u-ys-nPj"/>
@@ -143,8 +152,8 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
