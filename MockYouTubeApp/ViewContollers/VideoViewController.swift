@@ -162,18 +162,19 @@ class VideoViewController: UIViewController {
                     self.backToIdentityAllViews(iv: iv as! UIImageView)
                 }
             }else {
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8 , options: []) {
+                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+                    
                     self.moveToBottom(imageView: iv as! UIImageView)
+                    
+                } completion: { _ in
+                    
+                    self.videoImageView.isHidden = true
+                    self.videoImageBackView.isHidden = true
+                    self.dismiss(animated: false, completion: nil)
+                    
                 }
-
             }
-            
-            
-
-            
-            
         }
-        print("gesture.translation:", gesture.translation(in: iv))
     }
     
 //    一番したにvideoImageViewが行った時のbottomの確定するメソッド、ズレを防ぐため

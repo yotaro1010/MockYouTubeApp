@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Video List Controller-->
+        <!--Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="VideoListController" customModule="MockYouTubeApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,8 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpW-HI-aP8">
+                                <rect key="frame" x="12" y="723" width="390" height="70"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="WVm-AW-bzH"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jpu-Vs-41A">
-                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="709"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ylT-zM-reA">
                                     <size key="itemSize" width="128" height="128"/>
@@ -26,6 +33,11 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <view key="backgroundView" contentMode="scaleToFill" id="L9c-TS-fBE">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="709"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="U3T-Ad-eZi">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -98,13 +110,18 @@
                         <constraints>
                             <constraint firstItem="KH7-XZ-W1V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0Ak-M5-ftC"/>
                             <constraint firstItem="jpu-Vs-41A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6Lw-9K-fV5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RpW-HI-aP8" secondAttribute="bottom" constant="20" id="95j-We-s96"/>
                             <constraint firstItem="KH7-XZ-W1V" firstAttribute="trailing" secondItem="jpu-Vs-41A" secondAttribute="trailing" id="HPA-Zw-2YE"/>
                             <constraint firstItem="jpu-Vs-41A" firstAttribute="top" secondItem="KH7-XZ-W1V" secondAttribute="bottom" id="HwL-1V-gyr"/>
                             <constraint firstItem="KH7-XZ-W1V" firstAttribute="leading" secondItem="jpu-Vs-41A" secondAttribute="leading" id="KZ7-iH-a8t"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RpW-HI-aP8" secondAttribute="trailing" constant="12" id="N4F-pW-hCx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jpu-Vs-41A" secondAttribute="bottom" id="af7-oQ-NZT"/>
+                            <constraint firstItem="RpW-HI-aP8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="doI-Ob-AnM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jpu-Vs-41A" secondAttribute="trailing" id="wGH-gt-Fld"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="ame-Pa-7tU"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="headerHightConstraint" destination="dwH-AQ-mZt" id="HEk-Bs-GLv"/>
                         <outlet property="headerTopConstraint" destination="0Ak-M5-ftC" id="JHx-ox-93F"/>
@@ -125,6 +142,9 @@
         <image name="search" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
